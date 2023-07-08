@@ -1,4 +1,5 @@
 .vscode/**
+.chatassistant/**
 .vscode-test/**
 out/**
 node_modules/**
