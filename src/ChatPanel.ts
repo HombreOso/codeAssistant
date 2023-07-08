@@ -11,6 +11,7 @@ export class ChatPanel {
 
 	private readonly _panel: vscode.WebviewPanel
 	private readonly _extensionPath: string
+// 	private readonly _extensionUri: vscode.Uri
 	private _disposables: vscode.Disposable[] = []
 
 	public static createOrShow(extensionPath: string) {
@@ -21,14 +22,44 @@ export class ChatPanel {
 		if (ChatPanel.currentPanel) {
 			ChatPanel.currentPanel._panel.reveal(column)
 		} else {
+	// 		const panel = vscode.window.createWebviewPanel(
+	// 			ChatPanel.viewType,
+	// 			'Code Assistant',
+	// 			column || vscode.ViewColumn.One,
+	// 			{
+	// 				// Enable javascript in the webview
+	// 				enableScripts: true,
+
+	// 				// And restrict the webview to only loading content from our extension's `media` directory.
+	// 				localResourceRoots: [
+	// 					vscode.Uri.joinPath(extensionUri, 'media'),
+	// 					vscode.Uri.joinPath(extensionUri, 'out/compiled'),
+	// 				],
+	// 			}
+	// 		)
+
+	// 		ChatPanel.currentPanel = new ChatPanel(panel, extensionUri)
 			ChatPanel.currentPanel = new ChatPanel(extensionPath, column || vscode.ViewColumn.One)
 		}
 	}
 
+// 	public static kill() {
+// 		ChatPanel.currentPanel?.dispose()
+// 		ChatPanel.currentPanel = undefined
+// 	}
+
+// 	public static revive(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
+// 		ChatPanel.currentPanel = new ChatPanel(panel, extensionUri)
+// 	}
+
 	private constructor(extensionPath: string, column: vscode.ViewColumn) {
 		this._extensionPath = extensionPath
+// 		this._panel = panel
+// 		this._extensionUri = extensionUri
+// 		// Set the webview's initial html content
+// 		this._update()
 
-		// Create and show a new webview panel
+		// Create and show a new webview panel (not needed?)
 		this._panel = vscode.window.createWebviewPanel(ChatPanel.viewType, 'React', column, {
 			// Enable javascript in the webview
 			enableScripts: true,
@@ -37,7 +68,7 @@ export class ChatPanel {
 			localResourceRoots: [vscode.Uri.file(path.join(this._extensionPath, 'build'))],
 		})
 
-		// Set the webview's initial html content
+		// Set the webview's initial html content (not needed?)
 		this._panel.webview.html = this._getHtmlForWebview()
 
 		// Listen for when the panel is disposed
@@ -77,6 +108,35 @@ export class ChatPanel {
 			}
 		}
 	}
+
+	// 	private async _update() {
+// 		const webview = this._panel.webview
+
+// 		this._panel.webview.html = this._getHtmlForWebview(webview)
+// 		webview.onDidReceiveMessage(async (data) => {
+// 			switch (data.type) {
+// 				case 'onInfo': {
+// 					if (!data.value) {
+// 						return
+// 					}
+// 					vscode.window.showInformationMessage(data.value)
+// 					break
+// 				}
+// 				case 'onError': {
+// 					if (!data.value) {
+// 						return
+// 					}
+// 					vscode.window.showErrorMessage(data.value)
+// 					break
+// 				}
+// 				// case 'tokens': {
+// 				// 	await Util.globalState.update(accessTokenKey, data.accessToken)
+// 				// 	await Util.globalState.update(refreshTokenKey, data.refreshToken)
+// 				// 	break
+// 				// }
+// 			}
+// 		})
+// 	}
 
 	private _getHtmlForWebview() {
 		const manifest = require(path.join(this._extensionPath, 'build', 'asset-manifest.json'))

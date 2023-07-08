@@ -3,7 +3,7 @@ import { ChatPanel } from './ChatPanel'
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('code-assistant.open', async () => {
-			ChatPanel.createOrShow(context.extensionUri)
+			ChatPanel.createOrShow(context.extensionPath)
 		})
 	)
 }
