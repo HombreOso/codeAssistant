@@ -133,9 +133,9 @@ export class ChatPanel {
 		const stylesMainUri = webview.asWebviewUri(
 			vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css')
 		)
-		// const cssUri = webview.asWebviewUri(
-		// 	vscode.Uri.joinPath(this._extensionUri, 'out', 'compiled/swiper.css')
-		// )
+		const cssUri = webview.asWebviewUri(
+			vscode.Uri.joinPath(this._extensionUri, 'out', 'compiled/Chat.css')
+		)
 
 		// Use a nonce to only allow specific scripts to be run
 		const nonce = getNonce()
@@ -150,6 +150,7 @@ export class ChatPanel {
         	</script>
         	<link rel="stylesheet" href="${stylesResetUri}">
           <link rel="stylesheet" href="${stylesMainUri}">
+    <link rel="stylesheet" href="${cssUri}">
         	</head>
       	<body>
 		</body>
