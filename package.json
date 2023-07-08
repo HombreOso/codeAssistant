@@ -11,6 +11,26 @@
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+			  {
+				"id": "chat-assistant-sidebar-view",
+				"title": "Chat Assistant",
+				"icon": "media/chat.svg"
+			  }
+			]
+		  },
+		  "views": {
+			"chat-assistant-sidebar-view": [
+			  {
+				"type": "webview",
+				"id": "chat-assistant-sidebar",
+				"name": "Chat Assistant",
+				"icon": "media/chat.svg",
+				"contextualTitle": "Chat Assistant"
+			  }
+			]
+		  },
 		"commands": [
 			{
 				"category": "Code Assistant",

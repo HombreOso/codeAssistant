@@ -1,4 +1,4 @@
-import App from '../components/ChatWindow.svelte';
+import App from '../components/Sidebar.svelte';
 
 const app = new App({
 	target: document.body,

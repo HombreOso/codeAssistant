@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import { ChatPanel } from './ChatPanel'
+import { SidebarProvider } from './SidebarProvider'
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('code-assistant.open', () => {
@@ -16,6 +17,18 @@ export function activate(context: vscode.ExtensionContext) {
 			)
 		})
 	)
+
+	const sidebarProvider = new SidebarProvider(context.extensionUri);
+	context.subscriptions.push(
+	  vscode.window.registerWebviewViewProvider(
+		"chat-assistant-sidebar",
+		sidebarProvider
+	  )
+	);
+
+
+
+
 }
 
 // This method is called when your extension is deactivated
