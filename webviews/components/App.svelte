@@ -1,6 +1,10 @@
 <script lang='ts'>
     import ChatWindow from './ChatWindow.svelte';
 </script>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+</style>
 
-<h1 style="color: #1E1E1E;">Code Assistant</h1>
 <ChatWindow />

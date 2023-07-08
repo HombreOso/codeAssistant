@@ -137,6 +137,14 @@ export class ChatPanel {
 			vscode.Uri.joinPath(this._extensionUri, 'out', 'compiled/Chat.css')
 		)
 
+		// Create image URIs
+		const botImageUri = webview.asWebviewUri(
+			vscode.Uri.joinPath(this._extensionUri, 'out', 'compiled', 'assets', 'bot-avatar.png')
+		)
+		const userImageUri = webview.asWebviewUri(
+			vscode.Uri.joinPath(this._extensionUri, 'out', 'compiled', 'assets', 'user-avatar.png')
+		)
+
 		// Use a nonce to only allow specific scripts to be run
 		const nonce = getNonce()
 
@@ -147,7 +155,10 @@ export class ChatPanel {
         	<meta http-equiv="Content-Security-Policy" content="img-src https: data:; style-src 'unsafe-inline' ${webview.cspSource}; script-src 'nonce-${nonce}';">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
           <script nonce="${nonce}">
-        	</script>
+        const vscodeApi = acquireVsCodeApi();
+        const botImageSrc = '${botImageUri}';
+        const userImageSrc = '${userImageUri}';
+    </script>
         	<link rel="stylesheet" href="${stylesResetUri}">
           <link rel="stylesheet" href="${stylesMainUri}">
     <link rel="stylesheet" href="${cssUri}">
