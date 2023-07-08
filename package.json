@@ -41,6 +41,11 @@
 				"category": "Code Assistant",
 				"title": "Refresh",
 				"command": "code-assistant.refresh"
+			},
+			{
+				"category": "Code Assistant",
+				"title": "Renew",
+				"command": "code-assistant.renew"
 			}
 		]
 	},
