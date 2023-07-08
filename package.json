@@ -15,8 +15,8 @@
 		"commands": [
 			{
 				"category": "Code Assistant",
-				"title": "Prompt",
-				"command": "code-assistant.aiPrompt"
+				"title": "open",
+				"command": "code-assistant.open"
 			}
 		]
 	},

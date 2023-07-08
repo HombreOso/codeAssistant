@@ -1,11 +1,9 @@
 import * as vscode from 'vscode'
+import { ChatPanel } from './ChatPanel'
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
-		vscode.commands.registerCommand('code-assistant.aiPrompt', async () => {
-			const name = await vscode.window.showInputBox({
-				placeHolder: 'What is your name?',
-			})
-			vscode.window.showInformationMessage(`Hello ${name}!`)
+		vscode.commands.registerCommand('code-assistant.open', async () => {
+			ChatPanel.createOrShow(context.extensionUri)
 		})
 	)
 }
