@@ -1,41 +1,64 @@
 <script lang='ts'>
     export let text: string;
     export let isBot: boolean = false;
+    export let name: string = isBot ? 'Code Assistant' : 'User';
     export let isTyping: boolean = false;
+    let typingString: string = '...';
+    const botImageSrc: string = window['botImageSrc'];
+    console.log(`botImageSrc:`, botImageSrc)
+    const userImageSrc: string = window['userImageSrc'];
+    if (isTyping) {
+        setInterval(() => {
+            typingString = (typingString === '...') ? '.' : typingString+'.'
+        }, 500)
+    }
 </script>
 
 <style>
-    .message-bubble {
-        background-color: #1E1E1E;
-        color: #D4D4D4;
-        border-radius: 10px;
+    .message-container {
+        width: 100%;
         padding: 10px;
-        max-width: 70%;
-        animation: popIn 0.3s ease-out;
-    }
-    .message-bubble-bot {
         color: #D4D4D4;
+        display: flex;
+        align-items: center;
     }
-    .message-bubble-typing {
-        display: inline-block;
-        margin-right: 10px;
-        animation: typing 1s infinite;
+    pre {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    @keyframes typing {
-        0% { opacity: 0.5; }
-        50% { opacity: 1; }
-        100% { opacity: 0.5; }
+
+    .message-content {
+        margin-left: 10px;
     }
-    /* @keyframes popIn {
-        0% { transform: scale(0); }
-        100% { transform: scale(1); }
-    } */
+
+    .bot-message {
+        background-color: #192227;
+        /* color: #4f7a87; */
+        color: #5f7a87;
+    }
+    
+    .human-message {
+        background-color: #20292e;
+        color: #5f7a87;
+    }
+    .link-txt {
+        color: #55bec4;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
 </style>
 
-<span class={`message-bubble ${isBot ? 'message-bubble-bot' : ''}`}>
-    {#if isTyping}
-    <span class="message-bubble-typing">...</span>
-    {:else}
-    {text}
-    {/if}
-</span>
+<div class={`message-container ${isBot ? 'bot-message' : 'human-message'}`}>
+    <img class="avatar" src={isBot ? botImageSrc : userImageSrc} alt={name} />
+    <div class="message-content">
+        <strong>{name}</strong>
+        {#if isBot && isTyping}
+            <pre class="message-bubble-typing">{typingString}</pre>
+        {:else}
+            <pre>{text}</pre>
+        {/if}
+    </div>
+</div>

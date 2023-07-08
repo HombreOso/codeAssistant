@@ -10,6 +10,7 @@
     let isTyping: boolean = false;
 
     const sendMessage = async () => {
+        if (isTyping) return;
         if (message.trim() !== '') {
             messages = [...messages, { text: message, isBot: false }];
             let newMsg = message
@@ -32,9 +33,7 @@
 
     onMount(() => {
         messages = [
-            { text: 'Welcome to Code Assistant!', isBot: true },
-            { text: `Today is ${format(new Date(), 'EEEE, MMMM do, yyyy')}.`, isBot: true },
-            { text: 'How can I assist you today?', isBot: true }
+            { text: `Welcome to Code Assistant!\nHow can I assist you today?`, isBot: true },
         ];
     });
 
